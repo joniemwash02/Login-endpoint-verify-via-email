@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Verification</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4f4f4;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      width: 350px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2 id="title"></h2>
+  <p id="message"></p>
+  <p>Redirecting to login...</p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  const status = params.get("status");
+  const message = params.get("message");
+
+  const title = document.getElementById("title");
+  const msg = document.getElementById("message");
+
+  if (status === "success") {
+    title.innerText = "✅ Verified";
+    title.classList.add("success");
+  } else {
+    title.innerText = "❌ Error";
+    title.classList.add("error");
+  }
+
+  msg.innerText = message;
+
+  // redirect after 3 seconds
+  setTimeout(() => {
+    window.location.href = "/login.html";
+  }, 3000);
+</script>
+
+</body>
+</html>
